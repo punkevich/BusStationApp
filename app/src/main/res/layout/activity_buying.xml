@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:id="@+id/tableTicket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/titleTicketDepart"
+                        android:layout_width="195dp"
+                        android:layout_height="wrap_content"
+                        android:text="Отправление"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/titleTicketArr"
+                        android:layout_width="196dp"
+                        android:layout_height="wrap_content"
+                        android:text="Прибытие"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textTicketDepart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/textTicketArr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textTicketTimeDepart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textTicketTimeArr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textTicketPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="14sp" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/textPickPlaces"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="Выбор посадочного места:"
+                android:textSize="14sp" />
+
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="244dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="4"
+                android:stretchMode="columnWidth"
+                android:textAlignment="center"
+                android:verticalSpacing="5dp">
+
+            </GridView>
+
+            <TextView
+                android:id="@+id/textSelectedPlace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/titleCardData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Данные карты"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/titleNumCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Номер карты" />
+
+            <EditText
+                android:id="@+id/editNumCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="0000 0000 0000 0000"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/titleDateCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Срок действия" />
+
+            <EditText
+                android:id="@+id/editDateCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="MM/YY"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/titleCVCCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CVC-код" />
+
+            <EditText
+                android:id="@+id/editCVCCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="000"
+                android:inputType="numberPassword" />
+
+            <Button
+                android:id="@+id/btnTicketBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Купить билет"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

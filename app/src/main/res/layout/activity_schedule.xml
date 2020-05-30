@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fl_home"
+    tools:context="com.example.busstationapp.ScheduleActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/editSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="70dp"
+                android:ems="10"
+                android:hint="Введите название города"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:text="Выберите дату"
+                android:textSize="18sp" />
+
+            <CalendarView
+                android:id="@+id/calendarSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnShowSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:text="Показать расписание" />
+
+            <TextView
+                android:id="@+id/idTitleSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Расписание"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center">
+
+                <TextView
+                    android:id="@+id/textTitleDepart"
+                    android:layout_width="206dp"
+                    android:layout_height="match_parent"
+                    android:text="Отправление"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textTitleArriv"
+                    android:layout_width="206dp"
+                    android:layout_height="match_parent"
+                    android:text="Прибытие"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableLayout
+                android:id="@+id/tableSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f8fff7">
+
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

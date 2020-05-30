@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fl_home"
+    tools:context="com.example.busstationapp.OrdersActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Список купленных билетов"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/viewTemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center">
+
+            <TextView
+                android:id="@+id/textTitleDepart"
+                android:layout_width="206dp"
+                android:layout_height="wrap_content"
+                android:text="Отправление"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textTitleArriv"
+                android:layout_width="206dp"
+                android:layout_height="wrap_content"
+                android:text="Прибытие"
+                android:textAlignment="textStart"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableLayout
+            android:id="@+id/tableOrders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</FrameLayout>

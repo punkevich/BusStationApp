@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "266098128547",
+    "firebase_url": "https://busstationapp-dd602.firebaseio.com",
+    "project_id": "busstationapp-dd602",
+    "storage_bucket": "busstationapp-dd602.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266098128547:android:0d5b3789bd6d94b5d67116",
+        "android_client_info": {
+          "package_name": "com.example.busstationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266098128547-no5trivtmlifdd8kv2m2qd7ov9pj0mld.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.busstationapp",
+            "certificate_hash": "7959a2d9be8a908464b013809635555ae082e713"
+          }
+        },
+        {
+          "client_id": "266098128547-4k2kbnhr1gp36m91gl59c8g67b2knbe3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQqNPEhpjDg5LdkFxGeRJnhtosBe3f4nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266098128547-4k2kbnhr1gp36m91gl59c8g67b2knbe3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

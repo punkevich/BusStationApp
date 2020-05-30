@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Автовокзал</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_search">Поиск рейсов</string>
+    <string name="title_order">Мои заказы</string>
+    <string name="title_schedule">Расписание</string>
+</resources>
