@@ -37,7 +37,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="TextView"
                     android:textSize="18sp" />
 
                 <TextView
@@ -45,7 +44,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="TextView"
                     android:textSize="18sp" />
 
                 <TextView
@@ -53,7 +51,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="TextView"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -63,7 +60,6 @@
             android:id="@+id/profileEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:textAlignment="center"
             android:textSize="18sp" />
 

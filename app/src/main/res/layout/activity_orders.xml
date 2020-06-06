@@ -6,10 +6,13 @@
     android:id="@+id/fl_home"
     tools:context="com.example.busstationapp.OrdersActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -19,15 +22,9 @@
             android:text="Список купленных билетов"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/viewTemp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textAlignment="center">
 
             <TextView
@@ -50,7 +47,13 @@
         <TableLayout
             android:id="@+id/tableOrders"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="#f8fff7">
+
+        </TableLayout>
 
     </LinearLayout>
+</ScrollView>
 </FrameLayout>

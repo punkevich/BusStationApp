@@ -10,16 +10,57 @@ public class Ticket {
     public String date;
     public String trip_id;
     public String place_number;
+    public String departure_id;
+    public String destination_id;
+    public String departure_time;
+    public String arrival_time;
+
 
     public Ticket() {
 
     }
 
-    public Ticket(String station_id, String date, String trip_id, String place_number) {
+    public Ticket(String station_id, String date, String trip_id, String place_number, String departure_id, String destination_id, String departure_time, String arrival_time) {
         this.station_id = station_id;
         this.date = date;
         this.trip_id = trip_id;
         this.place_number = place_number;
+        this.departure_id = departure_id;
+        this.destination_id = destination_id;
+        this.departure_time = departure_time;
+        this.arrival_time = arrival_time;
+    }
+
+    public String getDeparture_id() {
+        return departure_id;
+    }
+
+    public void setDeparture_id(String departure_id) {
+        this.departure_id = departure_id;
+    }
+
+    public String getDestination_id() {
+        return destination_id;
+    }
+
+    public void setDestination_id(String destination_id) {
+        this.destination_id = destination_id;
+    }
+
+    public String getDeparture_time() {
+        return departure_time;
+    }
+
+    public void setDeparture_time(String departure_time) {
+        this.departure_time = departure_time;
+    }
+
+    public String getArrival_time() {
+        return arrival_time;
+    }
+
+    public void setArrival_time(String arrival_time) {
+        this.arrival_time = arrival_time;
     }
 
     public String getStation_id() {
@@ -61,7 +102,10 @@ public class Ticket {
         result.put("date", date);
         result.put("trip_id", trip_id);
         result.put("place_number", place_number);
-
+        result.put("departure_id", departure_id);
+        result.put("destination_id", destination_id);
+        result.put("departure_time", departure_time);
+        result.put("arrival_time", arrival_time);
         return result;
     }
 }

@@ -51,6 +51,10 @@ public class BuyingActivity extends AppCompatActivity {
     String currentTripId;
     String currentDate;
     String currentStationId;
+    String currentDepartureId;
+    String currentDestinationId;
+    String currentDepartureTime;
+    String currentArrivalTime;
     int selectedPlace;
 
     @Override
@@ -75,6 +79,11 @@ public class BuyingActivity extends AppCompatActivity {
         currentTripId = arguments.get("trip_id").toString();
         currentDate = arguments.get("date").toString();
         currentStationId = arguments.get("station_id").toString();
+        currentDepartureId = arguments.get("departure_id").toString();
+        currentDestinationId = arguments.get("destination_id").toString();
+        currentDepartureTime = arguments.get("departure_time").toString();
+        currentArrivalTime = arguments.get("arrival_time").toString();
+
 
         user = mAuth.getInstance().getCurrentUser();
         myRef = FirebaseDatabase.getInstance().getReference();
@@ -120,7 +129,9 @@ public class BuyingActivity extends AppCompatActivity {
         btnTicketBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Ticket ticket = new Ticket(currentStationId, currentDate, currentTripId, Integer.toString(selectedPlace));
+                Ticket ticket = new Ticket(currentStationId, currentDate, currentTripId,
+                        Integer.toString(selectedPlace), currentDepartureId, currentDestinationId,
+                        currentDepartureTime, currentArrivalTime);
                 Map<String, Object> postValues = ticket.toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put(user.getUid() + currentTripId, postValues);

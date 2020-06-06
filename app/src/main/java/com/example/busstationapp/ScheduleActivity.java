@@ -83,7 +83,7 @@ public class ScheduleActivity extends Fragment {
     }
 
     public void fillTable(final List<Trip> listRes) {
-        // Заголовок "Расписание"
+
         for (int i = 0; i < listRes.size(); i++) {
             // Строка <пункт_отправления> <пункт прибытия>
             buyingTrip = listRes.get(i);
@@ -146,6 +146,10 @@ public class ScheduleActivity extends Fragment {
                     intent.putExtra("trip_id", listRes.get(btnBuy.getId()).getTrip_id());
                     intent.putExtra("station_id", "station_id");
                     intent.putExtra("date", "date");
+                    intent.putExtra("departure_id", listRes.get(btnBuy.getId()).getDeparture_id());
+                    intent.putExtra("destination_id", listRes.get(btnBuy.getId()).getDestination_id());
+                    intent.putExtra("departure_time", listRes.get(btnBuy.getId()).getDeparture_time());
+                    intent.putExtra("arrival_time", listRes.get(btnBuy.getId()).getArrival_time());
                     startActivity(intent);
                 }
             });
