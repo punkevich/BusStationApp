@@ -10,6 +10,7 @@ public class Trip {
     String  count_occup;
     String  departure_id;
     String  departure_time;
+    String  destination_date;
     String  destination_id;
     String  number_of_occup;
     String  price;
@@ -19,7 +20,29 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(DatabaseReference mDatabase, String arrival_time, String count_free, String count_occup, String departure_id, String departure_time, String destination_id, String number_of_occup, String price, String trip_id, String typetrans_od) {
+    public Trip(DatabaseReference mDatabase, String arrival_time, String count_free, String count_occup, String departure_id, String departure_time, String destination_date, String destination_id, String number_of_occup, String price, String trip_id, String typetrans_od) {
+        this.mDatabase = mDatabase;
+        this.arrival_time = arrival_time;
+        this.count_free = count_free;
+        this.count_occup = count_occup;
+        this.departure_id = departure_id;
+        this.departure_time = departure_time;
+        this.destination_date = destination_date;
+        this.destination_id = destination_id;
+        this.number_of_occup = number_of_occup;
+        this.price = price;
+        this.trip_id = trip_id;
+        this.typetrans_od = typetrans_od;
+    }
+
+    public String getDestination_date() {
+        return destination_date;
+    }
+
+    public void setDestination_date(String destination_date) {
+        this.destination_date = destination_date;
+    }
+/*public Trip(DatabaseReference mDatabase, String arrival_time, String count_free, String count_occup, String departure_id, String departure_time, String destination_id, String number_of_occup, String price, String trip_id, String typetrans_od) {
         this.mDatabase = mDatabase;
         this.arrival_time = arrival_time;
         this.count_free = count_free;
@@ -31,7 +54,7 @@ public class Trip {
         this.price = price;
         this.trip_id = trip_id;
         this.typetrans_od = typetrans_od;
-    }
+    }*/
 
     public Trip(Trip u)
     {
@@ -42,6 +65,7 @@ public class Trip {
                 u.count_occup,
                 u.departure_id,
                 u.departure_time,
+                u.destination_date,
                 u.destination_id,
                 u.number_of_occup,
                 u.price,
