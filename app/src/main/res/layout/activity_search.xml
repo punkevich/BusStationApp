@@ -55,6 +55,32 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
                 android:text="Найти" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center">
+
+                <TextView
+                    android:id="@+id/textTitleDepartS"
+                    android:layout_width="206dp"
+                    android:layout_height="match_parent"
+                    android:text="Отправление"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textTitleArrivS"
+                    android:layout_width="206dp"
+                    android:layout_height="match_parent"
+                    android:text="Прибытие"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableLayout
+                android:id="@+id/tableSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 
