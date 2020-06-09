@@ -48,52 +48,6 @@ public class SearchActivity extends Fragment {
     List<Trip> foundTrips;
     SelectedDate selectedDate;
 
-    public class SelectedDate {
-        int Year;
-        int Month;
-        int Day;
-
-        public SelectedDate() {
-
-        }
-        public SelectedDate(int year, int month, int day) {
-            Year = year;
-            Month = month;
-            Day = day;
-        }
-
-        public int getYear() {
-            return Year;
-        }
-
-        public void setYear(int year) {
-            Year = year;
-        }
-
-        public int getMonth() {
-            return Month;
-        }
-
-        public void setMonth(int month) {
-            Month = month;
-        }
-
-        public int getDay() {
-            return Day;
-        }
-
-        public void setDay(int day) {
-            Day = day;
-        }
-
-        public String showDate() {
-            String result = Integer.toString(this.Month) + "-" +
-                    Integer.toString(this.Day) + "-" +
-                    Integer.toString(this.Year);
-            return result;
-        }
-    }
-
     public SearchActivity() {
 
     }
@@ -230,6 +184,7 @@ public class SearchActivity extends Fragment {
                     intent.putExtra("destination_id", foundTrips.get(btnBuy.getId()).getDestination_id());
                     intent.putExtra("departure_time", foundTrips.get(btnBuy.getId()).getDeparture_time());
                     intent.putExtra("arrival_time", foundTrips.get(btnBuy.getId()).getArrival_time());
+                    intent.putExtra("destination_date", foundTrips.get(btnBuy.getId()).getDestination_date());
                     startActivity(intent);
                 }
             });

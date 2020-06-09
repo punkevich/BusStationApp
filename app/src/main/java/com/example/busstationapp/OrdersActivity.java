@@ -108,11 +108,13 @@ public class OrdersActivity extends Fragment {
             TextView timeOrderDepart = new TextView(view.getContext());
             TextView timeOrderArrival = new TextView(view.getContext());
             timeOrderDepart.setWidth(tableOrders.getWidth() / 2);
-            timeOrderDepart.setText(listTicket.get(i).departure_time + "  ");
+            timeOrderDepart.setText(listTicket.get(i).getDate() + " " +
+                    listTicket.get(i).departure_time);
             timeOrderDepart.setTextSize(14);
             timeOrderDepart.setGravity(Gravity.CENTER);
             timeOrderArrival.setWidth(tableOrders.getWidth() / 2);
-            timeOrderArrival.setText(listTicket.get(i).arrival_time);
+            timeOrderArrival.setText(listTicket.get(i).getDestination_date() + " " +
+                    listTicket.get(i).arrival_time);
             timeOrderArrival.setTextSize(14);
             timeOrderArrival.setGravity(Gravity.CENTER);
             rowOrderTime.addView(timeOrderDepart);

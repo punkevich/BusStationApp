@@ -1,6 +1,10 @@
 package com.example.busstationapp;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Trip {
     private DatabaseReference mDatabase;
@@ -162,5 +166,22 @@ public class Trip {
 
     public void setTypetrans_od(String typetrans_od) {
         this.typetrans_od = typetrans_od;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("arrival_time", arrival_time);
+        result.put("count_free", count_free);
+        result.put("count_occup", count_occup);
+        result.put("departure_id", departure_id);
+        result.put("departure_time", departure_time);
+        result.put("destination_date", destination_date);
+        result.put("destination_id", destination_id);
+        result.put("number_of_occup", number_of_occup);
+        result.put("price", price);
+        result.put("trip_id", trip_id);
+        result.put("typetrans_od", typetrans_od);
+        return result;
     }
 }

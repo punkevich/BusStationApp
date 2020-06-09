@@ -72,6 +72,28 @@
             android:layout_marginRight="80dp"
             android:text="Выйти из профиля" />
 
+        <TableLayout
+            android:id="@+id/tableAdminPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
+
     </LinearLayout>
 
 </FrameLayout>

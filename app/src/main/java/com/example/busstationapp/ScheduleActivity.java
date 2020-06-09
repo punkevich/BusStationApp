@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -37,6 +38,7 @@ public class ScheduleActivity extends Fragment {
     Button showSchedule;
     TableLayout table;
     Trip buyingTrip;
+    SelectedDate selectedDate;
 
     public ScheduleActivity() {
     }
@@ -57,25 +59,43 @@ public class ScheduleActivity extends Fragment {
 
         FirebaseUser user = mAuth.getInstance().getCurrentUser();
         myRef = FirebaseDatabase.getInstance().getReference();
+        selectedDate = new SelectedDate(6,9,2020); // дефолтное значение для безопасности
+
+        calendarSchedule.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year,
+                                            int month, int dayOfMonth) {
+                selectedDate.setDay(dayOfMonth);
+                selectedDate.setMonth(month + 1);
+                selectedDate.setYear(year);
+
+                Toast.makeText(view.getContext(), selectedDate.showDate(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         showSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myRef.child("stations").child("station_id").child("date").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        List<Trip> listRes = new ArrayList<>();
-                        for (DataSnapshot dataValues : dataSnapshot.getChildren()){
-                            Trip trip = dataValues.getValue(Trip.class);
-                            listRes.add(trip);
+                if (!editSchedule.getText().equals("")) {
+                    myRef.child("stations").child(editSchedule.getText().toString())
+                            .child(selectedDate.showDate())
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            List<Trip> listRes = new ArrayList<>();
+                            for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
+                                Trip trip = dataValues.getValue(Trip.class);
+                                listRes.add(trip);
+                            }
+                            fillTable(listRes);
                         }
-                        fillTable(listRes);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
         });
 
@@ -105,10 +125,10 @@ public class ScheduleActivity extends Fragment {
             rowTimeDepartArr.setGravity(Gravity.CENTER_HORIZONTAL);
             TextView textTimeDepart = new TextView(view.getContext());
             TextView textTimeArrival = new TextView(view.getContext());
-            textTimeDepart.setText("date" + " " + listRes.get(i).getDeparture_time());
+            textTimeDepart.setText(selectedDate.showDate() + " " + listRes.get(i).getDeparture_time());
             textTimeDepart.setTextSize(14);
             textTimeDepart.setGravity(Gravity.CENTER);
-            textTimeArrival.setText("date" + " " + listRes.get(i).getArrival_time());
+            textTimeArrival.setText(listRes.get(i).getDestination_date() + " " + listRes.get(i).getArrival_time());
             textTimeArrival.setTextSize(14);
             textTimeArrival.setGravity(Gravity.CENTER);
             rowTimeDepartArr.addView(textTimeDepart);
@@ -118,7 +138,7 @@ public class ScheduleActivity extends Fragment {
             TableRow rowCountPlaces = new TableRow(view.getContext());
             rowCountPlaces.setGravity(Gravity.CENTER_HORIZONTAL);
             TextView textCountPlaces = new TextView(view.getContext());
-            textCountPlaces.setText(listRes.get(i).getCount_free());
+            textCountPlaces.setText("Свбодных мест: " + listRes.get(i).getCount_free());
             textCountPlaces.setTextSize(14);
             textCountPlaces.setGravity(Gravity.CENTER);
             rowCountPlaces.addView(textCountPlaces);
@@ -127,7 +147,7 @@ public class ScheduleActivity extends Fragment {
             TableRow rowPrice = new TableRow(view.getContext());
             rowPrice.setGravity(Gravity.CENTER_HORIZONTAL);
             TextView textPrice = new TextView(view.getContext());
-            textPrice.setText(listRes.get(i).getPrice());
+            textPrice.setText("Цена: " + listRes.get(i).getPrice() + " руб.");
             textPrice.setTextSize(14);
             textPrice.setGravity(Gravity.CENTER);
             rowPrice.addView(textPrice);
@@ -144,12 +164,13 @@ public class ScheduleActivity extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(view.getContext(), BuyingActivity.class);
                     intent.putExtra("trip_id", listRes.get(btnBuy.getId()).getTrip_id());
-                    intent.putExtra("station_id", "station_id");
-                    intent.putExtra("date", "date");
+                    intent.putExtra("station_id", editSchedule.getText());
+                    intent.putExtra("date", selectedDate.showDate());
                     intent.putExtra("departure_id", listRes.get(btnBuy.getId()).getDeparture_id());
                     intent.putExtra("destination_id", listRes.get(btnBuy.getId()).getDestination_id());
                     intent.putExtra("departure_time", listRes.get(btnBuy.getId()).getDeparture_time());
                     intent.putExtra("arrival_time", listRes.get(btnBuy.getId()).getArrival_time());
+                    intent.putExtra("destination_date", listRes.get(btnBuy.getId()).getDestination_date());
                     startActivity(intent);
                 }
             });

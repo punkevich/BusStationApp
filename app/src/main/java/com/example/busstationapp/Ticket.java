@@ -13,6 +13,7 @@ public class Ticket {
     public String departure_id;
     public String destination_id;
     public String departure_time;
+    public String destination_date;
     public String arrival_time;
 
 
@@ -20,7 +21,10 @@ public class Ticket {
 
     }
 
-    public Ticket(String station_id, String date, String trip_id, String place_number, String departure_id, String destination_id, String departure_time, String arrival_time) {
+
+    public Ticket(String station_id, String date, String trip_id, String place_number,
+                  String departure_id, String destination_id, String departure_time,
+                  String destination_date, String arrival_time) {
         this.station_id = station_id;
         this.date = date;
         this.trip_id = trip_id;
@@ -28,7 +32,16 @@ public class Ticket {
         this.departure_id = departure_id;
         this.destination_id = destination_id;
         this.departure_time = departure_time;
+        this.destination_date = destination_date;
         this.arrival_time = arrival_time;
+    }
+
+    public String getDestination_date() {
+        return destination_date;
+    }
+
+    public void setDestination_date(String destination_date) {
+        this.destination_date = destination_date;
     }
 
     public String getDeparture_id() {
@@ -105,7 +118,9 @@ public class Ticket {
         result.put("departure_id", departure_id);
         result.put("destination_id", destination_id);
         result.put("departure_time", departure_time);
+        result.put("destination_date", destination_date);
         result.put("arrival_time", arrival_time);
+
         return result;
     }
 }
