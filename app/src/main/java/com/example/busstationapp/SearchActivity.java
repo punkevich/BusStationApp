@@ -46,6 +46,7 @@ public class SearchActivity extends Fragment {
     String currentDeparture;
     String currentDestination;
     List<Trip> foundTrips;
+    List<Trip> tempTrips;
     SelectedDate selectedDate;
 
     public SearchActivity() {
@@ -74,7 +75,6 @@ public class SearchActivity extends Fragment {
                 selectedDate.setDay(dayOfMonth);
                 selectedDate.setMonth(month + 1);
                 selectedDate.setYear(year);
-
                 Toast.makeText(view.getContext(), selectedDate.showDate(), Toast.LENGTH_LONG).show();
             }
         });
@@ -82,16 +82,13 @@ public class SearchActivity extends Fragment {
         myRef = FirebaseDatabase.getInstance().getReference();
 
         foundTrips = new ArrayList<>();
-
+        tempTrips = new ArrayList<>();
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //currentDeparture = editDeparture.getText().toString();
-                //currentArrival = editArrival.getText().toString();
-
-                currentDeparture = "station_id";
-                currentDestination = "Тула";
-                myRef.child("stations").child("station_id").child("date").addListenerForSingleValueEvent(new ValueEventListener() {
+                currentDeparture = editDeparture.getText().toString();
+                currentDestination = editArrival.getText().toString();
+                myRef.child("stations").child(currentDeparture).child(selectedDate.showDate()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         List<Trip> listRes = new ArrayList<>();
@@ -114,11 +111,58 @@ public class SearchActivity extends Fragment {
     }
 
     public void searchTrip(List<Trip> listRes) {
+        foundTrips.clear();
         for (int i = 0; i < listRes.size(); i++) {
             if (listRes.get(i).getDestination_id().equals(currentDestination))
                 foundTrips.add(listRes.get(i));
         }
+        if (foundTrips.size() == 0) {
+            int temp = -1;
+            Transfer transfer = new Transfer(currentDeparture, currentDestination);
+            if (transfer.buildRoute()) {
+                if (transfer.transferStation.size() == 1) {
+                    temp = 0;
+                }
+                for (int i = 0; i < listRes.size(); i++) {
+                    if (listRes.get(i).getDestination_id().equals(transfer.transferStation.get(temp)))
+                        foundTrips.add(listRes.get(i));
+                }
+                //Находим маршрут <первый_пересадочный_пункт> -> <пункт_прибытия>
+                myRef.child("stations").child(foundTrips.get(0).getDestination_id())
+                        .child(selectedDate.showDate())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        List<Trip> listRes = new ArrayList<>();
+                        for (DataSnapshot dataValues : dataSnapshot.getChildren()){
+                            Trip trip = dataValues.getValue(Trip.class);
+                            listRes.add(trip);
+                        }
+                        getLastPoint(listRes);
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+        }
+        else
+            drawTable();
+    }
+
+    public void getLastPoint(List<Trip> listRes) {
+        for (int i = 0; i < listRes.size(); i++) {
+            if (listRes.get(i).getDestination_id().equals(currentDestination))
+                foundTrips.add(listRes.get(i));
+        }
+        drawTable();
+    }
+
+    public void drawTable() {
+        tableSearch.removeAllViews();
         for (int i = 0; i < foundTrips.size(); i++) {
             // Строка <пункт_отправления> <пункт прибытия>
             TableRow rowRoute = new TableRow(view.getContext());
@@ -139,10 +183,10 @@ public class SearchActivity extends Fragment {
             rowTimeDepartArr.setGravity(Gravity.CENTER_HORIZONTAL);
             TextView textTimeDepart = new TextView(view.getContext());
             TextView textTimeArrival = new TextView(view.getContext());
-            textTimeDepart.setText("date" + " " + foundTrips.get(i).getDeparture_time());
+            textTimeDepart.setText(selectedDate.showDate() + " " + foundTrips.get(i).getDeparture_time());
             textTimeDepart.setTextSize(14);
             textTimeDepart.setGravity(Gravity.CENTER);
-            textTimeArrival.setText("date" + " " + foundTrips.get(i).getArrival_time());
+            textTimeArrival.setText(foundTrips.get(i).getDestination_date() + " " + foundTrips.get(i).getArrival_time());
             textTimeArrival.setTextSize(14);
             textTimeArrival.setGravity(Gravity.CENTER);
             rowTimeDepartArr.addView(textTimeDepart);
@@ -152,7 +196,7 @@ public class SearchActivity extends Fragment {
             TableRow rowCountPlaces = new TableRow(view.getContext());
             rowCountPlaces.setGravity(Gravity.CENTER_HORIZONTAL);
             TextView textCountPlaces = new TextView(view.getContext());
-            textCountPlaces.setText(foundTrips.get(i).getCount_free());
+            textCountPlaces.setText("Свбодных мест: " + foundTrips.get(i).getCount_free());
             textCountPlaces.setTextSize(14);
             textCountPlaces.setGravity(Gravity.CENTER);
             rowCountPlaces.addView(textCountPlaces);
@@ -161,7 +205,7 @@ public class SearchActivity extends Fragment {
             TableRow rowPrice = new TableRow(view.getContext());
             rowPrice.setGravity(Gravity.CENTER_HORIZONTAL);
             TextView textPrice = new TextView(view.getContext());
-            textPrice.setText(foundTrips.get(i).getPrice());
+            textPrice.setText("Цена: " + foundTrips.get(i).getPrice() + " руб.");
             textPrice.setTextSize(14);
             textPrice.setGravity(Gravity.CENTER);
             rowPrice.addView(textPrice);
@@ -178,8 +222,8 @@ public class SearchActivity extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(view.getContext(), BuyingActivity.class);
                     intent.putExtra("trip_id", foundTrips.get(btnBuy.getId()).getTrip_id());
-                    intent.putExtra("station_id", "station_id");
-                    intent.putExtra("date", "date");
+                    intent.putExtra("station_id", editDeparture.getText().toString());
+                    intent.putExtra("date", selectedDate.showDate());
                     intent.putExtra("departure_id", foundTrips.get(btnBuy.getId()).getDeparture_id());
                     intent.putExtra("destination_id", foundTrips.get(btnBuy.getId()).getDestination_id());
                     intent.putExtra("departure_time", foundTrips.get(btnBuy.getId()).getDeparture_time());
@@ -192,6 +236,5 @@ public class SearchActivity extends Fragment {
             tableSearch.addView(rowBtnBuy);
         }
     }
-
 
 }
